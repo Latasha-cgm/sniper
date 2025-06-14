@@ -1,0 +1,134 @@
+flutimport 'package:flutter/material.dart';
+
+class MorePage extends StatefulWidget {
+  const MorePage({Key? key}) : super(key: key);
+
+  @override
+  State<MorePage> createState() => _MorePageState();
+}
+
+class _MorePageState extends State<MorePage> {
+  bool isDarkTheme = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: isDarkTheme ? Colors.black : Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        foregroundColor: isDarkTheme ? Colors.white : Colors.black,
+        elevation: 0,
+        title: const Text("More"),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context); // Go back
+          },
+        ),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        children: [
+          sectionTitle("Profile"),
+          buildListTile("Name", "Olivia Bennett", () {
+            // navigate or edit
+            debugPrint("Name tapped");
+          }),
+          buildListTile("Email", "olivia.bennett@email.com", () {
+            debugPrint("Email tapped");
+          }),
+          buildListTile("Phone Number", "+1 (555) 987-6543", () {
+            debugPrint("Phone tapped");
+          }),
+          const SizedBox(height: 20),
+          sectionTitle("Settings"),
+          SwitchListTile(
+            title: const Text("Theme", style: TextStyle(fontWeight: FontWeight.w600)),
+            value: isDarkTheme,
+            onChanged: (val) {
+              setState(() {
+                isDarkTheme = val;
+              });
+            },
+            activeColor: Colors.blueAccent,
+            inactiveThumbColor: Colors.grey,
+          ),
+          const SizedBox(height: 10),
+          sectionTitle("Preferences"),
+          buildSimpleTile("Security", () {
+            debugPrint("Security tapped");
+          }),
+          buildSimpleTile("Notifications", () {
+            debugPrint("Notifications tapped");
+          }),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 2,
+        onTap: (index) {
+          debugPrint("Tapped tab $index");
+          // Implement actual navigation logic here
+        },
+        backgroundColor: isDarkTheme ? Colors.black : Colors.white,
+        selectedItemColor: Colors.blueAccent,
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: "Transactions"),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
+        ],
+      ),
+    );
+  }
+
+  Widget sectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Text(
+        title,
+        style: TextStyle(
+          color: isDarkTheme ? Colors.white : Colors.black,
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
+        ),
+      ),
+    );
+  }
+
+  Widget buildListTile(String title, String subtitle, VoidCallback onTap) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      title: Text(
+        title,
+        style: TextStyle(
+          color: isDarkTheme ? Colors.grey[400] : Colors.grey[800],
+          fontSize: 14,
+        ),
+      ),
+      subtitle: Text(
+        subtitle,
+        style: TextStyle(
+          color: isDarkTheme ? Colors.white : Colors.black,
+          fontSize: 16,
+        ),
+      ),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+      onTap: onTap,
+    );
+  }
+
+  Widget buildSimpleTile(String title, VoidCallback onTap) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      title: Text(
+        title,
+        style: TextStyle(
+          color: isDarkTheme ? Colors.white : Colors.black,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+      onTap: onTap,
+    );
+  }
+}
