@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'screens/userlog.dart';
+import 'screens/signup.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,143 +12,95 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Profile Page',
-      theme: ThemeData(
-  primarySwatch: Colors.blue,  // This is a MaterialColor
-),
-      home: const ProfilePage(),
+      title: 'ScamSniper',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: const Color(0xFF1A1A2E),
+        primaryColor: const Color(0xFF00A3FF),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF1A1A2E),
+          elevation: 0,
+        ),
+      ),
+      initialRoute: '/welcome',
+      routes: {
+        '/welcome': (context) => const WelcomePage(),
+        '/login': (context) => const LoginPage(),
+        '/signup': (context) => const SignUpPage(),
+      },
     );
   }
 }
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Profile Section
-            const Text(
-              '# Profile',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.shield, size: 100, color: Color(0xFF00A3FF)),
+              const SizedBox(height: 20),
+              const Text(
+                'Stay Safe with ScamSniper',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            
-            // Name
-            const Text(
-              '**Name**',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+              const SizedBox(height: 10),
+              const Text(
+                'Protect your mobile money transactions from fraud and scams in real-time.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white70,
+                ),
               ),
-            ),
-            const SizedBox(height: 4),
-            const Text(
-              'Elizabeth Keen',
-              style: TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 16),
-            
-            // Email
-            const Text(
-              '**Email**',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+              const SizedBox(height: 40),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF00A3FF),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  child: const Text('Login'),
+                ),
               ),
-            ),
-            const SizedBox(height: 4),
-            const Text(
-              'Keenelizabeth@gmail.com',
-              style: TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 16),
-            
-            // Phone Number
-            const Text(
-              '**Phone Number**',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    side: const BorderSide(color: Color(0xFF00A3FF)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/signup');
+                  },
+                  child: const Text(
+                    'Sign Up',
+                    style: TextStyle(color: Color(0xFF00A3FF)),
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: 4),
-            const Text(
-              '+254712345678',
-              style: TextStyle(fontSize:16),
-            ),
-            const SizedBox(height: 16),
-            
-            // Divider
-            const Divider(thickness: 1),
-            const SizedBox(height: 16),
-            
-            // Settings Section
-            const Text(
-              '## Settings',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 16),
-            
-            // Theme
-            const Text(
-              '**Theme**',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 16),
-            
-            // Divider
-            const Divider(thickness: 1),
-            const SizedBox(height: 16),
-            
-            // Preferences Section
-            const Text(
-              '## Preferences',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 16),
-            
-            // Security
-            const Text(
-              '**Security**',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 16),
-            
-            // Notifications
-            const Text(
-              '**Notifications**',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 16),
-          ],
+            ],
+          ),
         ),
       ),
     );
