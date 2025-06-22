@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'screens/userlog.dart';
 import 'screens/signup.dart';
+import 'accountspage.dart';
+import 'home.dart';
+import 'package:sniper_app/alerts.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -22,11 +26,13 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      initialRoute: '/welcome',
+      initialRoute: '/home',
       routes: {
-        '/welcome': (context) => const WelcomePage(),
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignUpPage(),
+        '/account': (context) => const AccountPage(),
+        '/home': (context) => const HomePage(),
+        '/alerts': (context)=> const FraudAlertPage(),
       },
     );
   }

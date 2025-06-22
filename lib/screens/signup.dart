@@ -119,12 +119,7 @@ class SignUpPage extends StatelessWidget {
                   }
                   
                   // Successful sign up - navigate to home
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
-                    ),
-                  );
+                  Navigator.pushReplacementNamed(context, '/home');
                 },
                 child: const Text('Sign Up', 
                     style: TextStyle(color: Colors.white)),
